@@ -1,34 +1,36 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-#define LL long long
 
-void countzero() {
+void cost(){
     string s;
-    cin >> s;
-    LL res = s.size()-1;
-    LL lastNZ = -1; 
+    cin>>s;
 
-    for (LL i = res - 1; i >= 0; i--) {
-        if (s[i] != '0') {
-            lastNZ = i;
+    int cnt = 0;
+    int n = s.size();
+    int lastidx = n-1;
+
+    for(int i=n-1; i>=0; i--){
+        if(s[i]=='0')cnt++;
+        else{
+            lastidx = i;
             break;
         }
     }
-
-    for (LL i = 0; i < lastNZ; i++) {
-        if (s[i] == '0') {
-            res--;
+    for(int i=0; i<lastidx; i++){
+        if(s[i]!='0'){
+            cnt++;
         }
     }
-
-    cout << res << "\n";
+    cout<<cnt<<"\n";
 }
 
-int main() {
+int main(){
     int t;
-    cin >> t;
-    while (t--) {
-        countzero();
+    cin>>t;
+
+    while(t--){
+        cost();
     }
+
     return 0;
 }

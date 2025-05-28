@@ -10,6 +10,8 @@ class tnode{
     tnode* left;
     tnode* right;
 
+    vector<int>kLevel;
+
     tnode(int data){
         this->data = data;
         left = nullptr;
@@ -37,6 +39,28 @@ class tnode{
         cout<<root->data<<" ";
     }
 
+    int height(tnode* root){
+        if(root==nullptr)return 0;
+
+        return max(height(root->left), height(root->right))+1;
+    }
+
+    void printK(tnode* root, int k){
+        if(root==nullptr || k==0)return;
+        if(k==1)kLevel.push_back(root->data);
+        
+        printK(root->left, k-1);
+        printK(root->right, k-1);
+    }
+
+    void printVector(vector<int>&vector){
+        for(auto val:vector){
+            cout<<val<<"  ";
+        }
+    
+    }
+    
+
 };
 
 int main(){
@@ -46,7 +70,20 @@ int main(){
     root->right = new tnode(30);
     root->right->left = new tnode(40);
 
+
+    cout<<"//preorder traversal"<<endl;
     root->preorder(root);
+    cout<<endl;
+    cout<<"//height"<<endl;
+    cout<<root->height(root);
+    cout<<endl;
+    
+    root->printK(root, 2);
+    
+    cout<<"//k-Level traversal"<<endl;
+    root->printVector(root->kLevel);
+
+    
     
 
 
